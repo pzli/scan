@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="ZH-CN">
+
+<head>
+  <meta charset="utf-8">
+  <title>扫一扫</title>
+  <style>
+    .booth {
+      width: 400px;
+
+      background: #ccc;
+      border: 10px solid #ddd;
+      margin: 0 auto;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="booth">
+    <video id="video" width="400" height="300"></video>
+    <button id='tack'>拍照</button>
+    <canvas id='canvas' width='400' height='300'></canvas>
+    <div id="res"></div>
+  </div>
+  <script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.js"></script>
+  <script>
+    var video = document.getElementById('video'),
+      canvas = document.getElementById('canvas'),
+      snap = document.getElementById('tack'),
+      resDiv = document.getElementById('res'),
+      vendorUrl = window.URL || window.webkitURL;
+
+    //媒体对象
+    navigator.getMedia = navigator.getUserMedia ||
+      navagator.webkitGetUserMedia ||
+      navigator.mozGetUserMedia ||
+      navigator.msGetUserMedia;
+    navigator.getMedia({
+      video: true, //使用摄像头对象
+      audio: false //不适用音频
+    }, function (strem) {
+      console.log(strem);
+      video.srcObject = strem;
+      var promise = video.play();
+      if (promise !== undefined) {
+        // promise.then(() => {
+        //   // Autoplay started!
+        // }).catch(error => {
+        //   // Autoplay was prevented.
+        //   // Show a "Play" button so that user can start playback.
+        // });
+      }
+    }, function (error) {
+      //error.code
+      console.log(error);
+    });
+    snap.addEventListener('click', function () {
+
+      //绘制canvas图形
+      canvas.getContext('2d').drawImage(video, 0, 0, 400, 300);
+
+      //把canvas图像转为img图片
+      // var res = await fetch('https://aip.baidubce.com/rest/2.0/image-classify/v2/logo?access_token=24.2bf06b03c105f88cc1151ff40c0d5862.2592000.1534612954.282335-11549074',{
+      //   method: 'POST',
+      //   headers: {
+      //     'Content-Type': 'application/x-www-form-urlencoded'
+      //   },
+      //   body: {
+      //     'image': encodeURI(img.src)
+      //   }
+      // }).then(res => res.json());
+      $.ajax({
+        type: 'post',
+        url: 'https://aip.baidubce.com/rest/2.0/image-classify/v2/logo?access_token=24.2c63dabd7ef159feb98019b1110645aa.2592000.1543565421.282335-14629208',
+        header: {
+          'Content-Type': 'application/x-www-form-urlencoded',
+          'Access-Control-Allow-Origin': '*'
+        },
+        data: {
+          image: encodeURI(canvas.toDataURL("image/png").split(',')[1])
+        },
+        success: function(res) {
+          if(!res.result.length) resDiv.innerHTML = '没搜到！'
+          resDiv.innerHTML = '品牌名称：' + res.result[0].name + ', 置信度：' + res.result[0].probability
+        }
+      })
+    })
+
+  </script>
+  
+</body>
+
+</html>
