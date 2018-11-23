@@ -12,7 +12,7 @@
   <link rel="stylesheet" type="text/css" href="css/index.css">
   <link rel="stylesheet" type="text/css" href="css/style.css">
   <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/social-share.js/1.0.16/css/share.min.css">
-  
+
   <!-- <link rel="stylesheet" href="//brick.a.ssl.fastly.net/Roboto:400" /> -->
   <script src="js/jrj6out.js"></script>
   <script>try { Typekit.load({ async: false }); } catch (e) { }</script>
@@ -64,7 +64,9 @@
         <p id="res-desc-desc"></p>
       </div>
       <canvas id="res-img" width="60" height="60"></canvas>
-      <div id="share-box"></div>
+    </div>
+    <div id="res-share">
+      <div id="share-box" data-description="爱扫"></div>
     </div>
   </div>
   <script src='js/jquery.min.js'></script>
@@ -83,18 +85,19 @@
     TweenMax.to($button, duration, { scaleX: 1.2, scaleY: 1, ease: Back.easeOut, easeParams: [3], delay: delay });
     TweenMax.to($button, duration * 1.25, { scaleX: 1, scaleY: 1, ease: Back.easeOut, easeParams: [6], delay: delay * 3 });
   });
-  document.querySelector('#share').addEventListener('click',()=>{
-    $('#res-desc-left').attr('style','display: none');
-    $('#res-img').attr('style','display: none');
-    $('#share-box').attr('style','display: flex');
+  document.querySelector('#share').addEventListener('click', () => {
+    $('#res-desc').attr('style', 'display: none');
+    $('#res-share').attr('style', 'display: flex');
   })
-  $('#share-box').share({sites: ['qzone', 'qq', 'weibo','wechat', 'douban']});
+  $('#share-box').share({ sites: ['qzone', 'qq', 'weibo', 'wechat', 'douban'] });
 
   $('.wechat-qrcode').removeClass('bottom').addClass('top')
-  document.querySelector('#img-dashboard').addEventListener('click',()=>{
-    $('#res-desc-left').attr('style','display: block');
-    $('#res-img').attr('style','display: block');
-    $('#share-box').attr('style','display: none');
+  document.querySelector('#img-dashboard').addEventListener('click', () => {
+    $('#res-desc').attr('style', 'display: block');
+    $('#res-share').attr('style', 'display: none');
+  })
+  document.querySelector('#res-desc').addEventListener('click', () => {
+    window.location.href = "https://www.so.com/s?ie=utf-8&fr=so.com&src=home_so.com&q=" + window.res;
   })
 </script>
 

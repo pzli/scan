@@ -73,10 +73,11 @@ snap.addEventListener('click', function () {
       image: encodeURI(canvas.toDataURL("image/png").split(',')[1])
     },
     success: function (res) {
-      // if (!res.result.length || res.result[0].probability < 0.6 ) return resDiv.innerHTML = '未匹配到品牌！'
+      if (!res.result.length || res.result[0].probability < 0.6 ) return resDiv.innerHTML = '未匹配到品牌！'
       $('.res-page').attr('style', 'display: block');
       $('#res-title').html(res.result[0].name);
       $('#res-desc-desc').html(res.result[0].name);
+      window.res = res.result[0].name;
       resDiv.innerHTML = '品牌名称：' + res.result[0].name + ', 置信度：' + res.result[0].probability
     }
   })
