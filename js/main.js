@@ -1,5 +1,7 @@
 var video = document.getElementById('video'),
   canvas = document.getElementById('canvas'),
+  canvas1 = document.getElementById('canvas-res'),
+  canvas2 = document.getElementById('res-img'),
   snap = document.getElementById('tack'),
   resDiv = document.getElementById('res'),
   vendorUrl = window.URL || window.webkitURL;
@@ -27,7 +29,7 @@ if (navigator.mediaDevices.getUserMedia === undefined) {
   }
 }
 
-navigator.mediaDevices.getUserMedia({ audio: false, video: {facingMode:  "environment"} })
+navigator.mediaDevices.getUserMedia({ audio: false, video: { facingMode: {exact :"environment"} } })
   .then(function (stream) {
     var video = document.querySelector('video');
     // 旧的浏览器可能没有srcObject
@@ -48,7 +50,8 @@ snap.addEventListener('click', function () {
   resDiv.innerHTML = ''
   //绘制canvas图形
   canvas.getContext('2d').drawImage(video, 0, 0, 400, 300);
-
+  canvas1.getContext('2d').drawImage(video, 0, 0, 300, 350);
+  canvas2.getContext('2d').drawImage(video, 0, 0, 60, 60);
   //把canvas图像转为img图片
   // var res = await fetch('https://aip.baidubce.com/rest/2.0/image-classify/v2/logo?access_token=24.2bf06b03c105f88cc1151ff40c0d5862.2592000.1534612954.282335-11549074',{
   //   method: 'POST',
@@ -70,8 +73,12 @@ snap.addEventListener('click', function () {
       image: encodeURI(canvas.toDataURL("image/png").split(',')[1])
     },
     success: function (res) {
-      if (!res.result.length || res.result[0].probability < 0.6 ) return resDiv.innerHTML = '未匹配到品牌！'
+      // if (!res.result.length || res.result[0].probability < 0.6 ) return resDiv.innerHTML = '未匹配到品牌！'
+      $('.res-page').attr('style', 'display: block');
+      $('#res-title').html(res.result[0].name);
+      $('#res-desc-desc').html(res.result[0].name);
       resDiv.innerHTML = '品牌名称：' + res.result[0].name + ', 置信度：' + res.result[0].probability
     }
   })
 })
+

@@ -11,6 +11,8 @@
   <meta name="viewport" content="user-scalable=no, width=device-width, initial-scale=1.0, maximum-scale=1.0" />
   <link rel="stylesheet" type="text/css" href="css/index.css">
   <link rel="stylesheet" type="text/css" href="css/style.css">
+  <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/social-share.js/1.0.16/css/share.min.css">
+  
   <!-- <link rel="stylesheet" href="//brick.a.ssl.fastly.net/Roboto:400" /> -->
   <script src="js/jrj6out.js"></script>
   <script>try { Typekit.load({ async: false }); } catch (e) { }</script>
@@ -41,31 +43,59 @@
       <video id="video" width="250" height="200"></video>
       <div class="booth_btn">
         <div>
-            <button id='tack' class="btn">品牌识别</button>
+          <button id='tack' class="btn">品牌识别</button>
         </div>
         <div>
-            <button id='fun' class="btn">趣味识别</button>
-          </div>
+          <button id='fun' class="btn">趣味识别</button>
+        </div>
       </div>
       <canvas style="display: none" id='canvas' width='250' height='200'></canvas>
       <div id="res"></div>
     </div>
   </div>
+  <div class="res-page">
+    <img id="img-dashboard" src="./images/主框.png" width="100%" height="100%" style="z-index: 99;"></img>
+    <div id="res-title"></div>
+    <canvas id='canvas-res' width='300' height='350' style="z-index: 10;"></canvas>
+    <div id="share">分享给好友</div>
+    <div id="res-desc" style="z-index: 100;">
+      <div id="res-desc-left">
+        <p id="res-desc-tips">这个logo可能是</p>
+        <p id="res-desc-desc"></p>
+      </div>
+      <canvas id="res-img" width="60" height="60"></canvas>
+      <div id="share-box"></div>
+    </div>
+  </div>
   <script src='js/jquery.min.js'></script>
+  <script src="js/share.js"></script>
   <script src='js/TweenMax.min.js'></script>
   <script src='js/three.min.js'></script>
   <script src="js/index.js"></script>
-  <script src="https://webrtc.github.io/adapter/adapter-latest.js"></script>
   <script src="js/main.js"></script>
 </body>
 <script>
-    var $button = document.querySelector('.btn');
-    $button.addEventListener('click', function () {
-      var duration = 0.3,
-        delay = 0.08;
-      TweenMax.to($button, duration, { scaleY: 1.6, ease: Expo.easeOut });
-      TweenMax.to($button, duration, { scaleX: 1.2, scaleY: 1, ease: Back.easeOut, easeParams: [3], delay: delay });
-      TweenMax.to($button, duration * 1.25, { scaleX: 1, scaleY: 1, ease: Back.easeOut, easeParams: [6], delay: delay * 3 });
-    });
-  </script>
+  var $button = document.querySelector('.btn');
+  $button.addEventListener('click', function () {
+    var duration = 0.3,
+      delay = 0.08;
+    TweenMax.to($button, duration, { scaleY: 1.6, ease: Expo.easeOut });
+    TweenMax.to($button, duration, { scaleX: 1.2, scaleY: 1, ease: Back.easeOut, easeParams: [3], delay: delay });
+    TweenMax.to($button, duration * 1.25, { scaleX: 1, scaleY: 1, ease: Back.easeOut, easeParams: [6], delay: delay * 3 });
+  });
+  document.querySelector('#share').addEventListener('click',()=>{
+    $('#res-desc-left').attr('style','display: none');
+    $('#res-img').attr('style','display: none');
+    $('#share-box').attr('style','display: flex');
+  })
+  $('#share-box').share({sites: ['qzone', 'qq', 'weibo','wechat', 'douban']});
+
+  $('.wechat-qrcode').removeClass('bottom').addClass('top')
+  document.querySelector('#img-dashboard').addEventListener('click',()=>{
+    $('#res-desc-left').attr('style','display: block');
+    $('#res-img').attr('style','display: block');
+    $('#share-box').attr('style','display: none');
+  })
+</script>
+
 </html>
