@@ -14,15 +14,12 @@ if (navigator.mediaDevices === undefined) {
 // 因为这样可能会覆盖已有的属性。这里我们只会在没有getUserMedia属性的时候添加它。
 if (navigator.mediaDevices.getUserMedia === undefined) {
   navigator.mediaDevices.getUserMedia = function (constraints) {
-
     // 首先，如果有getUserMedia的话，就获得它
     var getUserMedia = navigator.webkitGetUserMedia || navigator.mozGetUserMedia;
-
     // 一些浏览器根本没实现它 - 那么就返回一个error到promise的reject来保持一个统一的接口
     if (!getUserMedia) {
       return Promise.reject(new Error('getUserMedia is not implemented in this browser'));
     }
-
     // 否则，为老的navigator.getUserMedia方法包裹一个Promise
     return new Promise(function (resolve, reject) {
       getUserMedia.call(navigator, constraints, resolve, reject);
@@ -30,7 +27,7 @@ if (navigator.mediaDevices.getUserMedia === undefined) {
   }
 }
 
-navigator.mediaDevices.getUserMedia({ audio: false, video: true })
+navigator.mediaDevices.getUserMedia({ audio: false, video: {facingMode:  "environment"} })
   .then(function (stream) {
     var video = document.querySelector('video');
     // 旧的浏览器可能没有srcObject
@@ -48,7 +45,7 @@ navigator.mediaDevices.getUserMedia({ audio: false, video: true })
     console.log(err.name + ": " + err.message);
   });
 snap.addEventListener('click', function () {
-
+  resDiv.innerHTML = ''
   //绘制canvas图形
   canvas.getContext('2d').drawImage(video, 0, 0, 400, 300);
 
@@ -73,7 +70,7 @@ snap.addEventListener('click', function () {
       image: encodeURI(canvas.toDataURL("image/png").split(',')[1])
     },
     success: function (res) {
-      if (!res.result.length) resDiv.innerHTML = '没搜到！'
+      if (!res.result.length || res.result[0].probability < 0.6 ) return resDiv.innerHTML = '未匹配到品牌！'
       resDiv.innerHTML = '品牌名称：' + res.result[0].name + ', 置信度：' + res.result[0].probability
     }
   })
