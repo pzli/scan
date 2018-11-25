@@ -63,24 +63,26 @@
           </div>
           <canvas id="res-img" width="60" height="60"></canvas>
         </div>
-        <div class="res-desc swiper-slide" style="z-index: 100;">
+        <div class="res-desc swiper-slide" style="z-index: 100;color: #888">
           <div class="res-desc-middle">
-            <div class="res-desc-left">
-              <p class="res-desc-tips">这个logo可能是</p>
-              <p class="res-desc-desc"></p>
+            <div class="res-desc-left" style="padding: 5px 10px">
+              <p class="res-desc-tips" style="font-weight: bold">红牛被"全国查封"？是违法生产？</p>
+              <p class="res-desc-desc" style="text-align: left;font-size: 14px;margin-top: 10px;">
+                  关于红牛,华彬集团和泰国天丝还在争论不休......
+              </p>
             </div>
           </div>
         </div>
-        <div class="res-desc swiper-slide" style="z-index: 100;">
-          <div class="res-desc-middle" style="width: 80%; margin: 0 auto;">
-            <p style="width: 100%; font-size: 14px; color: #888; text-align: left;">红牛维生素功能饮料250ml*24罐 整箱</p>
+        <div class="res-desc swiper-slide shop" style="z-index: 100;">
+          <div class="res-desc-middle" style="width: 80%; margin: 20px auto;">
+            <p style="width: 100%; font-size: 16px; color: #888; text-align: left;">红牛维生素功能饮料250ml*24罐 整箱</p>
             <p style="width: 100%; color: red; font-size: 12px; text-align: left;">￥132.00</p>
           </div>
         </div>
-        <div class="res-desc swiper-slide" style="z-index: 100;">
+        <div class="res-desc swiper-slide ditu" style="z-index: 100;">
           <div class="res-desc-middle" style="width: 70%; margin: 0 auto;">
-            <p style="width: 100%; font-size: 14px; color: #888; text-align: left;">711便利店（望京店）</p>
-            <p style="width: 100%; font-size: 12px; text-align: left;">车程约2分钟</p>
+            <p style="width: 100%; font-size: 16px; color: #888; text-align: left;">711便利店（酒仙桥八号店）</p>
+            <p style="width: 100%; font-size: 14px; text-align: left;">车程约2分钟</p>
           </div>
         </div>
       </div>
@@ -113,15 +115,20 @@
   })
   $('#share-box').share({ sites: ['qzone', 'qq', 'weibo', 'wechat', 'douban'] });
 
-  $('.wechat-qrcode').removeClass('bottom').addClass('top')
+  $('.wechat-qrcode').removeClass('bottom').addClass('top');
+
   document.querySelector('#img-dashboard').addEventListener('click', () => {
     $('.res-desc').attr('style', 'display: block');
     $('#res-share').attr('style', 'display: none');
   })
-  // document.querySelector('#res-desc').addEventListener('click', () => {
-  //   window.location.href = "https://www.so.com/s?ie=utf-8&fr=so.com&src=home_so.com&q=" + window.res;
-  // })
 
+  document.querySelector('.shop').addEventListener('click', () => {
+    window.location.href = "https://search.jd.com/Search?keyword=%E7%BA%A2%E7%89%9B&enc=utf-8&wq=h"
+  })
+  
+  document.querySelector('.ditu').addEventListener('click', () => {
+    window.location.href = "https://ditu.so.com/";
+  })
   var mySwiper = new Swiper('.swiper-container', {
     mode: 'horizontal',
     freeMode: false,
