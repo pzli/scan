@@ -145,7 +145,6 @@ h1 {
   top: 2%;
   text-align: center;
   opacity: 0;
-  z-index: 0;
 }
 @media screen and (min-width: 860px) {
   .sky-container {
@@ -283,22 +282,20 @@ h1 {
 }
 
 #res-desc{
-  position: absolute;
-  left: 5%;
-  bottom: 5%;
-  width: 90%;
+  width: 85vw;
   height: 80px;
   margin: 0 auto;
   border-radius: 20px;
   background: #fff;
   z-index: 100;
-  border: 1px solid #333;
 }
+
 #res-desc #res-desc-left {
   float: left;
   height: 100%;
   padding-left: 20px;
 }
+
 #res-desc-tips {
   font-size: 14px;
   height: 30px;
@@ -306,6 +303,7 @@ h1 {
   color: #ccc;
   margin: 0;
 }
+
 #res-desc #res-desc-desc {
   font-size: 24px;
   color: #000;
@@ -346,6 +344,44 @@ h1 {
   width: 220px;
   margin: 0 auto;
   height: 100%;
+  display: flex;
+  align-items: center;
+}
+
+#res-share {
+  position: absolute;
+  left: 7.5%;
+  bottom: 5%;
+  width: 85vw;
+  height: 80px;
+  margin: 0 auto;
+  border-radius: 20px;
+  background: #fff;
+  z-index: 100;
+  border: 1px solid #333;
   display: none;
+}
+
+.swiper-container {
+  width: 100%;
+  height: 100%;
+}
+
+.swiper-slide {
+  text-align: center;
+  font-size: 18px;
+  background: #fff;
+  /* Center slide text vertically */
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  -webkit-justify-content: center;
+  justify-content: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  -webkit-align-items: center;
   align-items: center;
 }
