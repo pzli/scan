@@ -79,6 +79,17 @@ snap.addEventListener('click', function () {
       $('#res-desc-desc').html(res.result[0].name);
       window.res = res.result[0].name;
       resDiv.innerHTML = '品牌名称：' + res.result[0].name + ', 置信度：' + res.result[0].probability
+      $.ajax({
+        type: 'get',
+        url: 'https://m.look.360.cn/s/api?q=' + 'nike' + '&pageSize=10&pn=1&sign=baike&f=json',
+        header: {
+          'Content-Type': 'application/x-www-form-urlencoded',
+          'Access-Control-Allow-Origin': '*'
+        },
+        success: function (res) {
+          console.log(res)
+        }
+      })
     }
   })
 })

@@ -4,6 +4,10 @@ body {
   overflow: hidden;
 }
 
+p {
+  margin: 0;
+}
+
 .intro-container {
   position: absolute;
   top: 50%;
@@ -281,7 +285,7 @@ h1 {
   z-index:10;
 }
 
-#res-desc{
+.res-desc{
   width: 85vw;
   height: 80px;
   margin: 0 auto;
@@ -290,8 +294,9 @@ h1 {
   z-index: 100;
 }
 
-#res-desc #res-desc-left {
-  float: left;
+.res-desc #res-desc-left {
+  position: absolute;
+  left: 20px;
   height: 100%;
   padding-left: 20px;
 }
@@ -304,7 +309,7 @@ h1 {
   margin: 0;
 }
 
-#res-desc #res-desc-desc {
+.res-desc #res-desc-desc {
   font-size: 24px;
   color: #000;
   height: 40px;

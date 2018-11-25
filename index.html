@@ -13,18 +13,14 @@
   <link rel="stylesheet" type="text/css" href="css/style.css">
   <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/social-share.js/1.0.16/css/share.min.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.4.2/css/swiper.css">
-  <!-- <link rel="stylesheet" href="//brick.a.ssl.fastly.net/Roboto:400" /> -->
   <script src="js/jrj6out.js"></script>
   <script>try { Typekit.load({ async: false }); } catch (e) { }</script>
   <script src="js/prefixfree.min.js"></script>
-
-
 </head>
 
 <body>
   <!-- 爱扫首屏 -->
   <div class="intro-container">
-    <h1>OPEN A WORLD YOU DON'T KNOW</h1>
     <div class="button shift-camera-button">
       <div class="border">
         <div class="left-plane"></div>
@@ -58,28 +54,32 @@
     <div id="res-title"></div>
     <canvas id='canvas-res' width='300' height='350' style="z-index: 10;"></canvas>
     <div id="share">分享给好友</div>
-    <div class="swiper-container" style="position:absolute; bottom:5%; left:7.5%; width: 85vw; height: 100px; overflow:hidden; z-index: 100;">
+    <div class="swiper-container" style="position:absolute; bottom:5%; left:7.5%; width: 85vw; height: 80px; overflow:hidden; z-index: 100;">
       <div class="swiper-wrapper">
-        <div id="res-desc" class="swiper-slide" style="z-index: 100;">
+        <div class="res-desc swiper-slide" style="z-index: 100;">
           <div id="res-desc-left">
             <p id="res-desc-tips">这个logo可能是</p>
             <p id="res-desc-desc"></p>
           </div>
           <canvas id="res-img" width="60" height="60"></canvas>
         </div>
-        <div id="res-desc" class="swiper-slide" style="z-index: 100;">
-          <div id="res-desc-left">
-            <p id="res-desc-tips">这个logo可能是</p>
-            <p id="res-desc-desc"></p>
+        <div class="res-desc swiper-slide" style="z-index: 100;">
+          <div class="res-desc-middle">
+            <div class="res-desc-left">
+              <p class="res-desc-tips">这个logo可能是</p>
+              <p class="res-desc-desc"></p>
+            </div>
           </div>
-          <canvas id="res-img" width="60" height="60"></canvas>
         </div>
-        <div id="res-desc" class="swiper-slide" style="z-index: 100;">
-          <div id="res-desc-left">
-            <p id="res-desc-tips">这个logo可能是</p>
-            <p id="res-desc-desc"></p>
+        <div class="res-desc swiper-slide" style="z-index: 100;">
+          <div class="res-desc-middle">
+              <p >红牛维生素功能饮料250ml*24罐 整箱</p>
+              <p>￥132.00</p>
           </div>
-          <canvas id="res-img" width="60" height="60"></canvas>
+        </div>
+        <div  class="res-desc swiper-slide" style="z-index: 100;">
+          <div class="res-desc-middle">
+          </div>
         </div>
       </div>
     </div>
@@ -92,6 +92,7 @@
   <script src='js/TweenMax.min.js'></script>
   <script src='js/three.min.js'></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.4.2/js/swiper.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.4.2/js/swiper.animate.min.js"></script>
   <script src="js/index.js"></script>
   <script src="js/main.js"></script>
 </body>
@@ -105,21 +106,30 @@
     TweenMax.to($button, duration * 1.25, { scaleX: 1, scaleY: 1, ease: Back.easeOut, easeParams: [6], delay: delay * 3 });
   });
   document.querySelector('#share').addEventListener('click', () => {
-    $('#res-desc').attr('style', 'display: none');
+    $('.res-desc').attr('style', 'display: none');
     $('#res-share').attr('style', 'display: flex');
   })
   $('#share-box').share({ sites: ['qzone', 'qq', 'weibo', 'wechat', 'douban'] });
 
   $('.wechat-qrcode').removeClass('bottom').addClass('top')
   document.querySelector('#img-dashboard').addEventListener('click', () => {
-    $('#res-desc').attr('style', 'display: block');
+    $('.res-desc').attr('style', 'display: block');
     $('#res-share').attr('style', 'display: none');
   })
   // document.querySelector('#res-desc').addEventListener('click', () => {
   //   window.location.href = "https://www.so.com/s?ie=utf-8&fr=so.com&src=home_so.com&q=" + window.res;
   // })
 
-  var mySwiper = new Swiper('.swiper-container',)
+  var mySwiper = new Swiper('.swiper-container', {
+    mode: 'horizontal',
+    freeMode: false,
+    touchRatio: 0.5,
+    longSwipesRatio: 0.1,
+    threshold: 50,
+    followFinger: false,
+    observer: true,//修改swiper自己或子元素时，自动初始化swiper  
+    observeParents: true,//修改swiper的父元素时，自动初始化swiper  
+  })
 </script>
 
 </html>
