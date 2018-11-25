@@ -121,7 +121,9 @@
     $('.res-desc').attr('style', 'display: block');
     $('#res-share').attr('style', 'display: none');
   })
-
+  document.querySelector('.sousuo').addEventListener('click', () => {
+    window.location.href = "https://www.so.com/s?ie=utf-8&fr=so.com&src=home_so.com&q=" + window.res;
+  })
   document.querySelector('.shop').addEventListener('click', () => {
     window.location.href = "https://search.jd.com/Search?keyword=%E7%BA%A2%E7%89%9B&enc=utf-8&wq=h"
   })
